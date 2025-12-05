@@ -1,0 +1,8 @@
+apiVersion: cilium.io/v2
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: cilium-lb-pool
+spec:
+  blocks:
+  - start: "x.x.x.x"
+    stop: "x.x.x.x"
