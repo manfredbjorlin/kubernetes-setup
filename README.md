@@ -7,6 +7,7 @@ The repo will expand as I install more flavours of k8s, and different configurat
 Maybe more Kubernetes flavours will be added at a later point
 
 ### Choose your flavour
+Choose your flavour of k8s, install and then jump to Cilium install
 
 #### k0s
 - Download [k0scli](https://github.com/k0sproject/k0sctl)
