@@ -24,6 +24,8 @@ Parameters in setup script disables flannel (CNI), kube-proxy, servicelb, networ
 - Run cilium download and install scripts
 - If `<pending>` EXTERNAL_IP run the cilium yaml - _IMPORTANT: edit to add correct ips_
 
+### Flow chart
+
 ```mermaid
 flowchart LR
 A(k0s)
