@@ -34,10 +34,10 @@ After choosing and installing your flavour of k8s, and disabled the "pre package
 
 ```mermaid
 flowchart LR
-A(k0s)
+A((k0s))
 B[k0scli apply -f 00-k0sctl-configuration.yaml]
 A-->B
-C(k9s)
+C((k9s))
 D[00-k3s-no-CNI.sh]
 C-->D
 E[01-k3s-export-kubeconfig.sh]
