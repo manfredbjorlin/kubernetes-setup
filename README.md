@@ -51,7 +51,7 @@ G-->H
 H{Got external IP?}
 I[kubectl apply -f 04-cilium-lb-pool.yaml]
 J((Done))
-H--No-->I
-H--Yes-->J
+H-->|No|I
+H-->|Yes|J
 I-->J
 ```
