@@ -67,4 +67,5 @@ I-->J
 
 ### Next steps
 
-The current `03-cilium-install.sh` will work as long as you will use the Ingress API, but is currently working on setting up cilium with Gatway API instead
+The current `03-cilium-install.sh` will work as long as you will use the Ingress API, but is currently working on setting up cilium with Gatway API instead.
+Initial scripts are submitted, and flowchart is updated, but this is subject to change, as this currently does not work on my server.
