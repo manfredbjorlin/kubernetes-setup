@@ -33,41 +33,58 @@ After choosing and installing your flavour of k8s, and disabled the "pre package
 ### Flow chart
 
 ```mermaid
-flowchart LR
-subgraph A[k0s]
-  B[k0scli apply -f 00-k0sctl-configuration.yaml]
-end
-subgraph C[k3s]
+flowchart TB
+LG((Let's go!))
+CT{Cluster<br>Type}
+LG-->CT
+Sorrey(((I'm so<br>sorrey)))
+CT-->|Single|Kubernetes
+CT-->|Multi|Sorrey
+subgraph Kubernetes
   direction LR
-  D[00-k3s-no-CNI.sh]
-  E[01-k3s-export-kubeconfig.sh]
-  D-->E
+  Z{Choose your<br>poison}
+  Z-->|k0s|A
+  Z-->|k9s|C
+  subgraph A[k0s]
+    direction LR
+    B[k0scli apply -f 00-k0sctl-configuration.yaml]
+  end
+  subgraph C[k3s]
+    direction LR
+    D[00-k3s-no-CNI.sh]
+    E[01-k3s-export-kubeconfig.sh]
+    D-->E
+  end
 end
-F[02-cilium-download.sh]
-A-->F
-C-->F
-subgraph K[Ingress]
-  G[03a-cilium-install-ingress.sh]
-end
-subgraph L[Gateway]
+subgraph X[Cilium]
   direction LR
-  M[03b-cilium-install-gateway.sh]
-  N[kubectl apply -f 04-gateway.yaml]
-  M-->N
+  F[02-cilium-download.sh]
+  CIG{Ingress or<br>Gateway API?}
+  subgraph K[Ingress]
+      G[03a-cilium-install-ingress.sh]
+    end
+    subgraph L[Gateway]
+      direction LR
+      M[03b-cilium-install-gateway.sh]
+      N[kubectl apply -f 04-gateway.yaml]
+      M-->N
+    end
+  F-->CIG
+  CIG-->|Ingress|K
+  CIG-->|Gateway API|L
+  H{Got external IP?}
+  K-->H
+  L-->H
+  H-->|No|I
+  I[kubectl apply -f 05-cilium-lb-pool.yaml]
 end
-F-->L
-L-->H
-F-->K
-K-->H
-H{Got external IP?}
-I[kubectl apply -f 05-cilium-lb-pool.yaml]
-J((Done))
-H-->|No|I
-H-->|Yes|J
-I-->J
+  X-->J
+  Kubernetes-->X
+  
+J(((Great<br>success!)))
 ```
 
 ### Next steps
 
-The current `03-cilium-install.sh` will work as long as you will use the Ingress API, but is currently working on setting up cilium with Gatway API instead.
-Initial scripts are submitted, and flowchart is updated, but this is subject to change, as this currently does not work on my server.
+Working on the Gateway API implementation.
+Initial scripts are submitted, and flowchart is updated, but these are subject to change, as this currently does not work on my server.
