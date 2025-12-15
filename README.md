@@ -34,24 +34,37 @@ After choosing and installing your flavour of k8s, and disabled the "pre package
 
 ```mermaid
 flowchart LR
-A((k0s))
+subgraph A[k0s]
 B[k0scli apply -f 00-k0sctl-configuration.yaml]
-A-->B
-C((k9s))
+end
+subgraph C[k3s]
 D[00-k3s-no-CNI.sh]
-C-->D
 E[01-k3s-export-kubeconfig.sh]
+end
 D-->E
 F[02-cilium-download.sh]
-B-->F
-E-->F
-G[03-cilium-install.sh]
-F-->G
-G-->H
+A-->F
+C-->F
+subgraph K[Ingress]
+G[03a-cilium-install-ingress.sh]
+end
+subgraph L[Gateway]
+M[03b-cilium-install-gateway.sh]
+N[kubectl apply -f 04-gateway.yaml]
+M-->N
+end
+F-->L
+L-->H
+F-->K
+K-->H
 H{Got external IP?}
-I[kubectl apply -f 04-cilium-lb-pool.yaml]
+I[kubectl apply -f 05-cilium-lb-pool.yaml]
 J((Done))
 H-->|No|I
 H-->|Yes|J
 I-->J
 ```
+
+### Next steps
+
+The current `03-cilium-install.sh` will work as long as you will use the Ingress API, but is currently working on setting up cilium with Gatway API instead
