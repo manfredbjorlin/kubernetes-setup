@@ -4,5 +4,4 @@ metadata:
   name: cilium-lb-pool
 spec:
   blocks:
-  - start: "x.x.x.x"
-    stop: "x.x.x.x"
+  - cidr: "<YOURIP>/32"
