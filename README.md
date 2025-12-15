@@ -30,12 +30,15 @@ After choosing and installing your flavour of k8s, and disabled the "pre package
 - Wait to see cilium getting ready: `cilium status --wait` - This will update the status until nodes are all ready
 - If `<pending>` EXTERNAL_IP run `sudo k0s kubectl apply -f 04-cilium-lb-pool.yaml` - _IMPORTANT: edit to add correct ips_
 
-### Flow chart
+## Multi Node
+I'm not that smart yet... I have to be done with the Gateway API for Single Node first!
+
+## Flow chart
 
 ```mermaid
 flowchart TB
 LG((Let's go!))
-CT{Cluster<br>Type}
+CT{Node<br>Type}
 LG-->CT
 Sorrey(((I'm so<br>sorrey)))
 CT-->|Single|Kubernetes
@@ -83,8 +86,3 @@ end
   
 J(((Great<br>success!)))
 ```
-
-### Next steps
-
-Working on the Gateway API implementation.
-Initial scripts are submitted, and flowchart is updated, but these are subject to change, as this currently does not work on my server.
