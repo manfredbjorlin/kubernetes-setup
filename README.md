@@ -35,23 +35,25 @@ After choosing and installing your flavour of k8s, and disabled the "pre package
 ```mermaid
 flowchart LR
 subgraph A[k0s]
-B[k0scli apply -f 00-k0sctl-configuration.yaml]
+  B[k0scli apply -f 00-k0sctl-configuration.yaml]
 end
 subgraph C[k3s]
-D[00-k3s-no-CNI.sh]
-E[01-k3s-export-kubeconfig.sh]
+  direction LR
+  D[00-k3s-no-CNI.sh]
+  E[01-k3s-export-kubeconfig.sh]
+  D-->E
 end
-D-->E
 F[02-cilium-download.sh]
 A-->F
 C-->F
 subgraph K[Ingress]
-G[03a-cilium-install-ingress.sh]
+  G[03a-cilium-install-ingress.sh]
 end
 subgraph L[Gateway]
-M[03b-cilium-install-gateway.sh]
-N[kubectl apply -f 04-gateway.yaml]
-M-->N
+  direction LR
+  M[03b-cilium-install-gateway.sh]
+  N[kubectl apply -f 04-gateway.yaml]
+  M-->N
 end
 F-->L
 L-->H
